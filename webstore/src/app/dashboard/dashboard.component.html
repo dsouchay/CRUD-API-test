@@ -1,0 +1,58 @@
+
+<header class="jumbotron">
+  <h2>Welcome to Our WebStore!</h2>
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a (click)="logout()" routerLinkActive="active">Logout</a>
+  </nav>  
+</header>
+
+
+<div class="container">
+  <div class="row">
+      <div class="col-lg-12">
+       <button *ngIf="rol==2" (click)="onShow()">Add new Product</button>
+
+          <div class="list-group">
+              <div *ngIf="add && rol==2">
+                  <label>Name:</label> <input #productName />
+                   <label>Available:</label> Yes<input type="radio" checked value="true" #productAvalilable />
+                                             No<input type="radio" value="false" #productAvalilable />   
+                  <label>Price:</label> <input #productPrice />
+                  <label>Description:</label> <input #productDescription />
+
+
+
+
+                  <button (click)="goAdd(productName.value,productAvalilable.value,productPrice.value,productDescription.value); productName.value='';productPrice.value='';productDescription.value=''">
+                    Add
+                  </button>
+                </div>
+
+            <div class="panel panel-default">
+              <div class="panel-heading">{{title}}</div>
+               
+                <table class="table">
+                  <tr><th>Id</th><th>Name</th><th>Price</th><th>Actions</th></tr>
+                  <tr *ngFor="let product of products">
+                    <td>{{product.id}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.price}}</td>
+                    <td>
+                      <a  [routerLink]="['/product', product.id]"  class="col-1-4">
+                        View Details
+                      </a>
+                       <button *ngIf="rol==2" class="delete"
+                              (click)="delete(product); $event.stopPropagation()">
+                              x
+                      </button>
+                    </td>
+                  </tr>
+                </table>
+            </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+

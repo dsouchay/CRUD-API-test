@@ -1,0 +1,72 @@
+
+<header class="jumbotron">
+  <h2>Welcome to Our WebStore!</h2>
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+    <a (click)="logout()" routerLinkActive="active">Logout</a>
+  </nav>  
+</header>
+<div class="container">
+	<div class="row">
+		<h2>Product details</h2>
+	</div>
+    <div class="row">
+        <fieldset class="for-panel">
+          <legend>Product Information</legend>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="form-horizontal">               
+                  <label class="col-xs-5 control-label">Id</label>
+                  <p class="form-control-static">{{product?.id}}</p>               
+                  <label class="col-xs-5 control-label">Name</label>
+                  <p class="form-control-static">{{product?.name}}</p>               
+                  <label class="col-xs-5 control-label">Aviable </label>
+                  <p class="form-control-static">{{product?.available?'Yes':'No'}}</p> 
+                  <label class="col-xs-5 control-label">Price </label>
+                  <p class="form-control-static">{{product?.price | currency:'EUR':true:'1.2-2'}}</p> 
+                  <label class="col-xs-5 control-label">Created </label>
+                  <p class="form-control-static">{{product?.created }}</p> 
+                  <label class="col-xs-5 control-label">Description </label>
+                  <p class="form-control-static">{{product?.description }}</p> 
+                 
+                                               
+              </div>
+             <br/> 
+              <div class="form-horizontal"> 
+                <div class="col-xs-3"> <button (click)="goBack()">Back</button></div>
+                <div class="col-xs-3"> <button *ngIf="rol==2" (click)="goEdit()">Edit</button></div>
+
+                
+
+              </div>
+            </div>
+            <div class="col-sm-6" *ngIf="product && edit &&  rol==2" >     
+
+              <div class="form-horizontal">               
+                <label class="col-xs-5 control-label">Id</label>
+                  <p class="form-control-static">{{product.id}}</p>               
+                <label class="col-xs-5 control-label">Name</label>
+                <input [(ngModel)]="product.name" placeholder="Name" class="form-control"/>
+                <label class="col-xs-5 control-label">Aviable </label>
+                <input [(ngModel)]="product.available" placeholder="Available 1 Yes / 0 No" class="form-control"/>
+                <label class="col-xs-5 control-label">Price </label>
+                <input [(ngModel)]="product.price" placeholder="Price" class="form-control"/>
+                <label class="col-xs-5 control-label">Description </label>
+                <input [(ngModel)]="product.description" placeholder="Description" class="form-control"/>                 
+                <label class="col-xs-5 control-label">Created </label>
+                <p class="form-control-static">{{product.created}}</p> 
+                <br/>
+                  <div class="col-xs-6" > <button (click)="save()">Save</button>                             
+              </div>
+              
+            </div>
+
+          </div>
+          <div class="row">
+
+            </div>
+              
+          </div>
+        </fieldset>
+    </div>
+</div>
